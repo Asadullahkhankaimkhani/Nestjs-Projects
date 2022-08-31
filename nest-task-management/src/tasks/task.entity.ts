@@ -1,6 +1,6 @@
-import { Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 import { TaskStatus } from './task.model';
-
+@Entity()
 export class Task {
   @PrimaryGeneratedColumn()
   id: number;
