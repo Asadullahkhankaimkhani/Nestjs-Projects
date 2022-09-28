@@ -8,8 +8,8 @@ export class Event {
   name: string;
   @Column()
   description: string;
-  @Column()
-  when: Date;
+  // @Column()
+  // when: Date;
   @Column()
   address: string;
 }
