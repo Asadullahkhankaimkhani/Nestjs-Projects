@@ -8,3 +8,4 @@ async function bootstrap() {
   app.useGlobalPipes(new ValidationPipe());
 }
 bootstrap();
+// group validator can be used to validate multiple values in a single group
