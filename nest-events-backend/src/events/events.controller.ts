@@ -7,6 +7,7 @@ import {
   Param,
   Post,
   Put,
+  ParseIntPipe,
 } from '@nestjs/common';
 import { CreateEventDto } from './DTO/create-event.dto';
 import { UpdateEventDto } from './DTO/update-event.dto';
@@ -44,9 +45,9 @@ export class EventsController {
     });
   }
 
-  @Get('/:id')
-  async findOne(@Param('id') id) {
-    return await this.respository.findOne(id);
+  @Get(':id')
+  async findSingle(@Param('id', ParseIntPipe) id: number) {
+    return await this.respository.findOneBy({ id: id });
   }
 
   @Post()
@@ -57,9 +58,10 @@ export class EventsController {
     });
   }
 
-  @Put('/:id')
+  @Put(':id')
   async update(@Param('id') id, @Body() input: UpdateEventDto) {
-    const event = await this.respository.findOne(id);
+    const event = await this.respository.findOneBy({ id: id });
+
     return await this.respository.save({
       ...event,
       ...input,
@@ -67,10 +69,10 @@ export class EventsController {
     });
   }
 
-  @Delete('/:id')
+  @Delete(':id')
   @HttpCode(204)
   async remove(@Param('id') id) {
-    const event = await this.respository.findOne(id);
+    const event = await this.respository.findOneBy({ id: id });
     return await this.respository.remove(event);
   }
 }
