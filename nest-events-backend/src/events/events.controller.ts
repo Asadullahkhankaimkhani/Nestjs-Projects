@@ -9,12 +9,14 @@ import {
   Put,
   ParseIntPipe,
   Logger,
+  NotFoundException,
 } from '@nestjs/common';
 import { CreateEventDto } from './DTO/create-event.dto';
 import { UpdateEventDto } from './DTO/update-event.dto';
 import { Event } from '../entities/events.entity';
 import { Like, MoreThan, Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
+import { NotFoundError } from 'rxjs';
 
 @Controller('events')
 export class EventsController {
@@ -53,7 +55,12 @@ export class EventsController {
 
   @Get(':id')
   async findSingle(@Param('id', ParseIntPipe) id: number) {
-    return await this.respository.findOneBy({ id: id });
+    const event = await this.respository.findOneBy({ id: id });
+
+    if (!event) {
+      throw new NotFoundException(`Event with id ${id} not found`);
+    }
+    return event;
   }
 
   @Post()
