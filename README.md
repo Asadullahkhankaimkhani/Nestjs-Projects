@@ -1,3 +1,4 @@
-# Nestjs-Projects
+# Nestjs-Project
 
+Nest Event Project by -- Oleksandr Kocherhin
 
