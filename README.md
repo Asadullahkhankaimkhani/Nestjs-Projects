@@ -1,4 +1,4 @@
 # Nestjs-Project
 
-Nest Event Project by -- Oleksandr Kocherhin
+1 - Nest Events Management Project by -- Oleksandr Kocherhin
 
